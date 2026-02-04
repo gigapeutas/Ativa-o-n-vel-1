@@ -1,140 +1,491 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ConSySencI.A — Ativação do Sistema</title>
-  <meta name="description" content="Página oficial de ativação do ConSySencI.A. Entenda como o sistema funciona, as regras do grupo e os próximos passos.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Página oficial de ativação do ConSySencI.A. Entenda como funciona, regras do grupo e próximos passos." />
+  <meta name="theme-color" content="#050812" />
+
+  <style>
+    :root{
+      --bg:#050812;
+      --bg2:#070A12;
+      --card:#0B1020;
+      --line:rgba(0,255,156,.18);
+      --text:#E8F2FF;
+      --muted:rgba(232,242,255,.72);
+      --muted2:rgba(232,242,255,.55);
+      --neon:#00FF9C;
+      --neon2:#00E0A1;
+      --warn:#FFD54A;
+      --danger:#FF4D4D;
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 980px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica, "Noto Sans", "Liberation Sans", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% 0%, rgba(0,255,156,.14), transparent 60%),
+        radial-gradient(1000px 500px at 90% 10%, rgba(0,255,156,.10), transparent 55%),
+        radial-gradient(900px 500px at 50% 110%, rgba(0,255,156,.08), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    .particles{
+      position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.30;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(0,255,156,.18) 0 1px, transparent 1px 100%),
+        radial-gradient(circle at 70% 30%, rgba(0,255,156,.14) 0 1px, transparent 1px 100%),
+        radial-gradient(circle at 40% 80%, rgba(0,255,156,.16) 0 1px, transparent 1px 100%);
+      background-size: 520px 520px, 640px 640px, 760px 760px;
+      animation: drift 18s linear infinite;
+      filter: blur(.1px);
+    }
+    @keyframes drift{
+      0%{transform:translate3d(0,0,0)}
+      50%{transform:translate3d(-20px, 18px, 0)}
+      100%{transform:translate3d(0,0,0)}
+    }
+
+    .wrap{position:relative; z-index:1;}
+    header{
+      position:sticky; top:0; z-index:5;
+      backdrop-filter: blur(14px);
+      background: rgba(5,8,18,.55);
+      border-bottom: 1px solid rgba(0,255,156,.10);
+    }
+    .header-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      min-width:0;
+    }
+    .logo{
+      width:34px; height:34px; border-radius:12px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(0,255,156,.35), transparent 60%),
+        linear-gradient(135deg, rgba(0,255,156,.22), rgba(0,255,156,.06));
+      border: 1px solid rgba(0,255,156,.25);
+      box-shadow: 0 10px 26px rgba(0,0,0,.35);
+      position:relative;
+    }
+    .logo:after{
+      content:"";
+      position:absolute; inset:8px;
+      border-radius:10px;
+      border:1px solid rgba(0,255,156,.35);
+      opacity:.9;
+    }
+    .brand h1{
+      font-size:14px; margin:0; letter-spacing:.2px; line-height:1.1;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .pill{
+      font-size:12px; color:rgba(0,255,156,.95);
+      border:1px solid rgba(0,255,156,.25);
+      background: rgba(0,255,156,.06);
+      padding:8px 10px;
+      border-radius:999px;
+      display:flex; align-items:center; gap:8px;
+      white-space:nowrap;
+    }
+    .dot{
+      width:7px; height:7px; border-radius:50%;
+      background: var(--neon);
+      box-shadow: 0 0 18px rgba(0,255,156,.65);
+    }
+
+    .container{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:22px 16px 44px;
+    }
+
+    .panel{
+      border:1px solid rgba(0,255,156,.14);
+      background: linear-gradient(180deg, rgba(11,16,32,.82), rgba(11,16,32,.55));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .panel-head{
+      padding:26px 18px 16px;
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(0,255,156,.22);
+      background: rgba(0,255,156,.06);
+      color: rgba(0,255,156,.96);
+      font-size:12px;
+      letter-spacing:.2px;
+    }
+    .title{
+      margin:14px 0 8px;
+      font-size:26px;
+      line-height:1.15;
+      letter-spacing:.2px;
+    }
+    .subtitle{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.55;
+      max-width: 75ch;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:14px;
+      padding: 0 18px 18px;
+    }
+    .card{
+      border:1px solid rgba(0,255,156,.12);
+      background: rgba(7,10,18,.55);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    .card h2{
+      margin:0 0 10px;
+      font-size:15px;
+      letter-spacing:.2px;
+    }
+    .card p{
+      margin:0 0 10px;
+      color: var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .card p:last-child{margin-bottom:0}
+    .muted{color:var(--muted2)}
+
+    .list{
+      margin: 10px 0 0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:10px;
+    }
+    .item{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(0,255,156,.10);
+      background: rgba(11,16,32,.55);
+    }
+    .n{
+      flex:0 0 auto;
+      width:28px; height:28px;
+      border-radius:10px;
+      display:grid; place-items:center;
+      border:1px solid rgba(0,255,156,.25);
+      background: rgba(0,255,156,.08);
+      color: rgba(0,255,156,.95);
+      font-weight:700;
+      box-shadow: 0 0 0 4px rgba(0,255,156,.06);
+    }
+    .item div{flex:1}
+    .item b{color:var(--text); font-weight:650}
+    .item p{margin:0; font-size:13px; color:var(--muted); line-height:1.45}
+
+    .callout{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,213,74,.22);
+      background: rgba(255,213,74,.06);
+      margin-top: 10px;
+    }
+    .callout .ic{
+      width:26px; height:26px;
+      border-radius:10px;
+      display:grid; place-items:center;
+      border:1px solid rgba(255,213,74,.28);
+      background: rgba(255,213,74,.10);
+      color: rgba(255,213,74,.95);
+      flex:0 0 auto;
+      margin-top:1px;
+      font-weight:900;
+    }
+    .callout p{margin:0; color: rgba(232,242,255,.78); font-size:13px; line-height:1.45}
+
+    .rules{
+      display:grid;
+      gap:10px;
+      margin-top: 10px;
+    }
+    .rule{
+      display:flex;
+      gap:10px;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(0,255,156,.10);
+      background: rgba(11,16,32,.45);
+    }
+    .ban{
+      width:22px; height:22px;
+      border-radius:8px;
+      display:grid; place-items:center;
+      border:1px solid rgba(255,77,77,.25);
+      background: rgba(255,77,77,.08);
+      color: rgba(255,77,77,.95);
+      flex:0 0 auto;
+      margin-top:1px;
+      font-weight:900;
+    }
+    .ok{
+      width:22px; height:22px;
+      border-radius:8px;
+      display:grid; place-items:center;
+      border:1px solid rgba(0,255,156,.25);
+      background: rgba(0,255,156,.08);
+      color: rgba(0,255,156,.95);
+      flex:0 0 auto;
+      margin-top:1px;
+      font-weight:900;
+    }
+    .rule p{margin:0; font-size:13px; color: var(--muted); line-height:1.45}
+    .rule b{color:var(--text)}
+
+    .btnrow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 12px;
+    }
+    a.btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      border-radius: 14px;
+      padding: 14px 14px;
+      font-size:14px;
+      font-weight:750;
+      letter-spacing:.2px;
+      color:#02120C;
+      background: linear-gradient(135deg, var(--neon), var(--neon2));
+      box-shadow: 0 16px 44px rgba(0,255,156,.18);
+      flex: 1 1 220px;
+      transition: transform .15s ease, filter .15s ease;
+    }
+    a.btn:hover{filter:brightness(1.02)}
+    a.btn:active{transform: translateY(1px)}
+    a.btn.secondary{
+      color: var(--text);
+      background: rgba(0,255,156,.08);
+      border:1px solid rgba(0,255,156,.20);
+      box-shadow:none;
+      font-weight:650;
+    }
+
+    .footer{
+      margin-top: 16px;
+      padding: 14px 2px 0;
+      color: rgba(232,242,255,.45);
+      font-size:12px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .footer a{
+      color: rgba(0,255,156,.85);
+      text-decoration:none;
+      border-bottom: 1px dashed rgba(0,255,156,.25);
+    }
+
+    @media (min-width: 900px){
+      .grid{
+        grid-template-columns: 1.05fr .95fr;
+        align-items:start;
+      }
+      .title{font-size:32px}
+      .panel-head{padding:30px 26px 18px}
+      .grid{padding: 0 26px 26px}
+      .card{padding:18px}
+    }
+  </style>
 </head>
 
 <body>
+  <div class="particles" aria-hidden="true"></div>
 
-<section>
-  <h1>Ativação do Sistema — ConSySencI.A</h1>
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <h1>ConSySencI.A</h1>
+      </div>
+      <div class="pill">
+        <span class="dot" aria-hidden="true"></span>
+        <span><b>Ativação</b> • Página Oficial</span>
+      </div>
+    </div>
+  </header>
 
-  <p>
-    Esta é a <strong>página oficial de ativação</strong> do ConSySencI.A.
-    Leia atentamente as informações abaixo antes de iniciar sua operação no sistema.
-  </p>
-</section>
+  <main class="wrap">
+    <div class="container">
+      <section class="panel">
+        <div class="panel-head">
+          <div class="kicker">✅ Leia antes de operar</div>
+          <h2 class="title">Ativação do Sistema — ConSySencI.A</h2>
+          <p class="subtitle">
+            Esta é a <b>página oficial de ativação</b>. Aqui você entende como o sistema funciona,
+            quais são as regras do Grupo Oficial e o que fazer a seguir.
+          </p>
+        </div>
 
-<hr>
+        <div class="grid">
 
-<section>
-  <h2>O que é o ConSySencI.A</h2>
+          <!-- Coluna esquerda -->
+          <div class="card">
+            <h2>O que é o ConSySencI.A</h2>
+            <p>
+              O <b>ConSySencI.A</b> é um sistema estruturado de operação e vendas automáticas no WhatsApp,
+              com <b>acesso controlado</b> por grupo oficial.
+            </p>
+            <p>
+              Ele não é um curso isolado e não promete resultados rápidos.
+              Você entra em um <b>sistema operacional</b> com fluxo definido, regras claras e evolução contínua.
+            </p>
 
-  <p>
-    O <strong>ConSySencI.A</strong> é um sistema estruturado de vendas automáticas
-    operado via WhatsApp, com acesso controlado por grupo oficial.
-  </p>
+            <div class="callout">
+              <div class="ic">!</div>
+              <p>
+                <b>Importante:</b> o funcionamento é organizado.
+                Evite pedir “passo a passo individual” no privado — tudo é orientado dentro do fluxo do grupo.
+              </p>
+            </div>
 
-  <p>
-    Ele não é um curso isolado, nem uma promessa de ganhos rápidos.
-    Trata-se de um <strong>sistema operacional</strong> com regras, fluxo definido
-    e evolução contínua.
-  </p>
-</section>
+            <h2 style="margin-top:16px;">Como funciona na prática</h2>
+            <ol class="list" style="margin-top:10px;">
+              <li class="item">
+                <div class="n">1</div>
+                <div><p>Você entra no <b>Grupo Oficial ConSySencI.A</b>.</p></div>
+              </li>
+              <li class="item">
+                <div class="n">2</div>
+                <div><p>Recebe as <b>orientações iniciais</b> e acessos disponíveis.</p></div>
+              </li>
+              <li class="item">
+                <div class="n">3</div>
+                <div><p>Segue o <b>fluxo</b> apresentado e começa a operar.</p></div>
+              </li>
+              <li class="item">
+                <div class="n">4</div>
+                <div><p>Opera respeitando as <b>regras</b> e avisos fixados no grupo.</p></div>
+              </li>
+            </ol>
 
-<hr>
+            <p class="muted" style="margin-top:10px;">
+              Tudo foi pensado para reduzir ruído, evitar confusão e manter o sistema escalável.
+            </p>
+          </div>
 
-<section>
-  <h2>Como o sistema funciona na prática</h2>
+          <!-- Coluna direita -->
+          <div class="card">
+            <h2>Grupo Oficial (acesso controlado)</h2>
+            <p>
+              O grupo é um ambiente <b>oficial e organizado</b>. O acesso é liberado após verificação
+              e a entrada pode exigir <b>aprovação</b>.
+            </p>
 
-  <ol>
-    <li>Você entra no <strong>Grupo Oficial ConSySencI.A</strong></li>
-    <li>Recebe orientações iniciais e materiais disponíveis</li>
-    <li>Utiliza o sistema conforme o fluxo apresentado</li>
-    <li>Opera respeitando as regras da comunidade</li>
-  </ol>
+            <h2 style="margin-top:14px;">Regras do sistema</h2>
+            <div class="rules">
+              <div class="rule">
+                <div class="ban">✕</div>
+                <p><b>Proibido</b> spam, flood ou mensagens repetidas.</p>
+              </div>
+              <div class="rule">
+                <div class="ban">✕</div>
+                <p><b>Proibido</b> divulgar links, produtos ou contatos sem autorização.</p>
+              </div>
+              <div class="rule">
+                <div class="ban">✕</div>
+                <p><b>Proibido</b> desrespeito a membros, administradores ou regras fixadas.</p>
+              </div>
+              <div class="rule">
+                <div class="ok">✓</div>
+                <p><b>Siga</b> o passo a passo e avisos fixados no grupo para operar corretamente.</p>
+              </div>
+              <div class="rule">
+                <div class="ok">✓</div>
+                <p><b>Organização</b> = acesso estável. Quem quebra regra pode ser removido.</p>
+              </div>
+            </div>
 
-  <p>
-    Todo o funcionamento acontece de forma organizada,
-    sem suporte individual constante e sem atendimento manual prolongado.
-  </p>
-</section>
+            <div class="callout" style="border-color: rgba(255,77,77,.25); background: rgba(255,77,77,.06);">
+              <div class="ic" style="border-color: rgba(255,77,77,.28); background: rgba(255,77,77,.10); color: rgba(255,77,77,.95);">!</div>
+              <p>
+                <b>Atenção:</b> o não cumprimento das regras pode resultar em
+                <b>remoção imediata do grupo</b> para proteger o sistema.
+              </p>
+            </div>
 
-<hr>
+            <h2 style="margin-top:14px;">O que o Nível 1 inclui</h2>
+            <ul class="list" style="list-style:none; padding:0; margin-top:10px;">
+              <li class="item">
+                <div class="ok">✓</div>
+                <div><p>Acesso ao <b>Grupo Oficial</b> e orientações iniciais.</p></div>
+              </li>
+              <li class="item">
+                <div class="ok">✓</div>
+                <div><p>Materiais e estrutura do <b>fluxo operacional</b> do Nível 1.</p></div>
+              </li>
+              <li class="item">
+                <div class="ok">✓</div>
+                <div><p>Direito de operar conforme as <b>regras vigentes</b>.</p></div>
+              </li>
+            </ul>
 
-<section>
-  <h2>Sobre o Grupo Oficial</h2>
+            <h2 style="margin-top:14px;">Próximo passo</h2>
+            <p>
+              Se você já recebeu o link, entre no grupo e aguarde a <b>aprovação</b>.
+              Após aprovado, siga as orientações fixadas para iniciar sua operação.
+            </p>
 
-  <p>
-    O grupo do ConSySencI.A é um <strong>ambiente controlado</strong>.
-    Ele existe para organização, alinhamento e operação do sistema.
-  </p>
+            <div class="btnrow">
+              <a class="btn" href="https://afiliados.consysencia.com/" rel="noopener">Voltar para Afiliados</a>
+              <a class="btn secondary" href="https://wa.me/5511934929066" rel="noopener">Falar no WhatsApp</a>
+            </div>
 
-  <ul>
-    <li>O acesso é liberado somente após verificação</li>
-    <li>Todos os membros seguem as mesmas regras</li>
-    <li>O grupo não é um chat livre ou grupo de spam</li>
-  </ul>
-</section>
+            <div class="footer">
+              <span>© <span id="year"></span> ConSySencI.A</span>
+              <span><a href="https://afiliados.consysencia.com/" rel="noopener">Página de Acessos</a></span>
+            </div>
+          </div>
 
-<hr>
+        </div>
+      </section>
+    </div>
+  </main>
 
-<section>
-  <h2>Regras importantes</h2>
-
-  <ul>
-    <li>🚫 Proibido spam, flood ou divulgação externa</li>
-    <li>🚫 Proibido desrespeito a membros ou administradores</li>
-    <li>🚫 Proibido envio de links sem autorização</li>
-    <li>✅ Siga o fluxo apresentado no grupo</li>
-    <li>✅ Respeite os avisos e orientações fixadas</li>
-  </ul>
-
-  <p>
-    O não cumprimento das regras pode resultar em
-    <strong>remoção imediata do grupo</strong> sem aviso prévio.
-  </p>
-</section>
-
-<hr>
-
-<section>
-  <h2>O que este nível inclui</h2>
-
-  <ul>
-    <li>Acesso ao Grupo Oficial ConSySencI.A</li>
-    <li>Materiais iniciais do sistema</li>
-    <li>Fluxo operacional do Nível 1</li>
-    <li>Direito de operar conforme as regras vigentes</li>
-  </ul>
-
-  <p>
-    Novos recursos, automações ou níveis
-    podem ser liberados futuramente conforme a evolução do sistema.
-  </p>
-</section>
-
-<hr>
-
-<section>
-  <h2>Próximo passo</h2>
-
-  <p>
-    Se você chegou até aqui, significa que já iniciou o processo corretamente.
-  </p>
-
-  <p>
-    Retorne ao WhatsApp, siga as instruções recebidas
-    e aguarde a <strong>aprovação de entrada no grupo</strong>.
-  </p>
-
-  <p>
-    Após aprovado, basta acompanhar as orientações publicadas
-    para iniciar sua operação.
-  </p>
-</section>
-
-<hr>
-
-<footer>
-  <p>
-    ConSySencI.A — Sistema em evolução<br>
-    Acesso controlado • Operação estruturada • Comunidade oficial
-  </p>
-</footer>
-
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
